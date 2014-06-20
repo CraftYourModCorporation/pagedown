@@ -90,7 +90,7 @@
     // - run() actually starts the editor; should be called after all necessary plugins are registered. Calling this more than once is a no-op.
     // - refreshPreview() forces the preview to be updated. This method is only available after run() was called.
     Markdown.Editor = function (markdownConverter, idPostfix, options) {
-        
+
         options = options || {};
 
         if (typeof options.handler === "function") { //backwards compatible behavior
@@ -1023,9 +1023,9 @@
 
         var background = doc.createElement("div"),
             style = background.style;
-        
+
         background.className = "wmd-prompt-background";
-        
+
         style.position = "absolute";
         style.top = "0";
 
@@ -1140,6 +1140,7 @@
             // The input text box
             input = doc.createElement("input");
             input.type = "text";
+            input.class="ui"
             input.value = defaultInputText;
             style = input.style;
             style.display = "block";
@@ -1379,16 +1380,16 @@
             var normalYShift = "0px";
             var disabledYShift = "-20px";
             var highlightYShift = "-40px";
-            var image = button.getElementsByTagName("span")[0];
+            //var image = button.getElementsByTagName("span")[0];
             if (isEnabled) {
-                image.style.backgroundPosition = button.XShift + " " + normalYShift;
+                /*image.style.backgroundPosition = button.XShift + " " + normalYShift;
                 button.onmouseover = function () {
                     image.style.backgroundPosition = this.XShift + " " + highlightYShift;
                 };
 
                 button.onmouseout = function () {
                     image.style.backgroundPosition = this.XShift + " " + normalYShift;
-                };
+                };*/
 
                 // IE tries to select the background image "button" text (it's
                 // implemented in a list item) so we have to cache the selection
@@ -1414,7 +1415,7 @@
                 }
             }
             else {
-                image.style.backgroundPosition = button.XShift + " " + disabledYShift;
+              //  image.style.backgroundPosition = button.XShift + " " + disabledYShift;
                 button.onmouseover = button.onmouseout = button.onclick = function () { };
             }
         }
@@ -1437,60 +1438,48 @@
             buttonRow.id = "wmd-button-row" + postfix;
             buttonRow.className = 'wmd-button-row';
             buttonRow = buttonBar.appendChild(buttonRow);
-            var xPosition = 0;
-            var makeButton = function (id, title, XShift, textOp) {
-                var button = document.createElement("li");
-                button.className = "wmd-button";
-                button.style.left = xPosition + "px";
-                xPosition += 25;
-                var buttonImage = document.createElement("span");
+
+            var makeSpacer, group;
+            var makeButton = function (id, title, icon, textOp) {
+                var button = document.createElement("a");
+                button.className = "wmd-button ui button";
+                var buttonImage = document.createElement("i");
                 button.id = id + postfix;
+                buttonImage.className = icon + " icon"
                 button.appendChild(buttonImage);
                 button.title = title;
-                button.XShift = XShift;
                 if (textOp)
                     button.textOp = textOp;
                 setupButton(button, true);
-                buttonRow.appendChild(button);
+                group.appendChild(button);
                 return button;
             };
-            var makeSpacer = function (num) {
-                var spacer = document.createElement("li");
-                spacer.className = "wmd-spacer wmd-spacer" + num;
-                spacer.id = "wmd-spacer" + num + postfix;
-                buttonRow.appendChild(spacer);
-                xPosition += 25;
-            }
+            (makeSpacer = function () {
+                group = document.createElement("div");
+                group.className = "ui small icon basic buttons";
+                buttonRow.appendChild(group);
+            })()
 
-            buttons.bold = makeButton("wmd-bold-button", getString("bold"), "0px", bindCommand("doBold"));
-            buttons.italic = makeButton("wmd-italic-button", getString("italic"), "-20px", bindCommand("doItalic"));
+            buttons.bold = makeButton("wmd-bold-button", getString("bold"), "bold", bindCommand("doBold"));
+            buttons.italic = makeButton("wmd-italic-button", getString("italic"), "italic", bindCommand("doItalic"));
             makeSpacer(1);
-            buttons.link = makeButton("wmd-link-button", getString("link"), "-40px", bindCommand(function (chunk, postProcessing) {
+            buttons.link = makeButton("wmd-link-button", getString("link"), "globe", bindCommand(function (chunk, postProcessing) {
                 return this.doLinkOrImage(chunk, postProcessing, false);
             }));
-            buttons.quote = makeButton("wmd-quote-button", getString("quote"), "-60px", bindCommand("doBlockquote"));
-            buttons.code = makeButton("wmd-code-button", getString("code"), "-80px", bindCommand("doCode"));
-            buttons.image = makeButton("wmd-image-button", getString("image"), "-100px", bindCommand(function (chunk, postProcessing) {
+            buttons.quote = makeButton("wmd-quote-button", getString("quote"), "quote left", bindCommand("doBlockquote"));
+            buttons.code = makeButton("wmd-code-button", getString("code"), "code", bindCommand("doCode"));
+            buttons.image = makeButton("wmd-image-button", getString("image"), "photo", bindCommand(function (chunk, postProcessing) {
                 return this.doLinkOrImage(chunk, postProcessing, true);
             }));
             makeSpacer(2);
-            buttons.olist = makeButton("wmd-olist-button", getString("olist"), "-120px", bindCommand(function (chunk, postProcessing) {
+            buttons.olist = makeButton("wmd-olist-button", getString("olist"), "ordered list", bindCommand(function (chunk, postProcessing) {
                 this.doList(chunk, postProcessing, true);
             }));
-            buttons.ulist = makeButton("wmd-ulist-button", getString("ulist"), "-140px", bindCommand(function (chunk, postProcessing) {
+            buttons.ulist = makeButton("wmd-ulist-button", getString("ulist"), "list", bindCommand(function (chunk, postProcessing) {
                 this.doList(chunk, postProcessing, false);
             }));
-            buttons.heading = makeButton("wmd-heading-button", getString("heading"), "-160px", bindCommand("doHeading"));
-            buttons.hr = makeButton("wmd-hr-button", getString("hr"), "-180px", bindCommand("doHorizontalRule"));
-            makeSpacer(3);
-            buttons.undo = makeButton("wmd-undo-button", getString("undo"), "-200px", null);
-            buttons.undo.execute = function (manager) { if (manager) manager.undo(); };
-
-            var redoTitle = /win/.test(nav.platform.toLowerCase()) ?
-                getString("redo") :
-                getString("redomac"); // mac and other non-Windows platforms
-
-            buttons.redo = makeButton("wmd-redo-button", redoTitle, "-220px", null);
+            buttons.heading = makeButton("wmd-heading-button", getString("heading"), "font", bindCommand("doHeading"));
+            buttons.hr = makeButton("wmd-hr-button", getString("hr"), "horizontal ellipsis", null);
             buttons.redo.execute = function (manager) { if (manager) manager.redo(); };
 
             if (helpOptions) {
@@ -1716,7 +1705,7 @@
 
         }
         else {
-            
+
             // We're moving start and end tag back into the selection, since (as we're in the else block) we're not
             // *removing* a link, but *adding* one, so whatever findTags() found is now back to being part of the
             // link text. linkEnteredCallback takes care of escaping any brackets.
@@ -1754,7 +1743,7 @@
                     // would mean a zero-width match at the start. Since zero-width matches advance the string position,
                     // the first bracket could then not act as the "not a backslash" for the second.
                     chunk.selection = (" " + chunk.selection).replace(/([^\\](?:\\\\)*)(?=[[\]])/g, "$1\\").substr(1);
-                    
+
                     var linkDef = " [999]: " + properlyEncoded(link);
 
                     var num = that.addLinkDef(chunk, linkDef);
@@ -1796,7 +1785,7 @@
         chunk.before = chunk.before.replace(/(\n|^)[ ]{0,3}([*+-]|\d+[.])[ \t]*\n$/, "\n\n");
         chunk.before = chunk.before.replace(/(\n|^)[ ]{0,3}>[ \t]*\n$/, "\n\n");
         chunk.before = chunk.before.replace(/(\n|^)[ \t]+\n$/, "\n\n");
-        
+
         // There's no selection, end the cursor wasn't at the end of the line:
         // The user wants to split the current list item / code line / blockquote line
         // (for the latter it doesn't really matter) in two. Temporarily select the
@@ -1824,7 +1813,7 @@
                 commandMgr.doCode(chunk);
             }
         }
-        
+
         if (fakeSelection) {
             chunk.after = chunk.selection + chunk.after;
             chunk.selection = "";
