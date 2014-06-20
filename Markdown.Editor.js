@@ -1430,19 +1430,16 @@
 
             var buttonBar = panels.buttonBar;
 
-            var normalYShift = "0px";
-            var disabledYShift = "-20px";
-            var highlightYShift = "-40px";
 
             var buttonRow = document.createElement("ul");
             buttonRow.id = "wmd-button-row" + postfix;
-            buttonRow.className = 'wmd-button-row';
+            buttonRow.className = 'wmd-button-row ui icon small secondary menu';
             buttonRow = buttonBar.appendChild(buttonRow);
 
             var makeSpacer, group;
             var makeButton = function (id, title, icon, textOp) {
                 var button = document.createElement("a");
-                button.className = "wmd-button ui button";
+                button.className = "wmd-button item";
                 var buttonImage = document.createElement("i");
                 button.id = id + postfix;
                 buttonImage.className = icon + " icon"
@@ -1455,9 +1452,12 @@
                 return button;
             };
             (makeSpacer = function () {
+                item = document.createElement("div");
+                item.className = "item";
                 group = document.createElement("div");
-                group.className = "ui small icon basic buttons";
-                buttonRow.appendChild(group);
+                group.className = "icon menu";
+                item.appendChild(group);
+                buttonRow.appendChild(item);
             })()
 
             buttons.bold = makeButton("wmd-bold-button", getString("bold"), "bold", bindCommand("doBold"));
