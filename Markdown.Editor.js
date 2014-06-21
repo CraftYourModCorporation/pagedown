@@ -1439,7 +1439,7 @@
             var makeSpacer, group;
             var makeButton = function (id, title, icon, textOp) {
                 var button = document.createElement("a");
-                button.className = "wmd-button vertically fitted item";
+                button.className = "wmd-button item";
                 var buttonImage = document.createElement("i");
                 button.id = id + postfix;
                 buttonImage.className = icon + " icon"
@@ -1453,7 +1453,7 @@
             };
             (makeSpacer = function () {
                 item = document.createElement("div");
-                item.className = "item";
+                item.className = "vertically fitted item";
                 group = document.createElement("div");
                 group.className = "icon menu";
                 item.appendChild(group);
