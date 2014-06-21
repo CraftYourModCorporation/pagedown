@@ -1,72 +1,89 @@
 <!DOCTYPE html>
-
 <html>
 
-    <head>
-        <title>PageDown Demo Page</title>
+<head>
+    <title>PageDown Demo Page</title>
+    <link rel="stylesheet" type="text/css" href="demo.css" />
+    <script type="text/javascript" src="../../Markdown.Converter.js"></script>
+    <script type="text/javascript" src="../../Markdown.Sanitizer.js"></script>
+    <script type="text/javascript" src="../../Markdown.Editor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/0.18.0/css/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/semantic-ui/0.18.0/javascript/semantic.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+</head>
 
-        <link rel="stylesheet" type="text/css" href="demo.css" />
+<body>
+    <div class="wmd-panel input-panel">
+        <div id="wmd-button-bar"></div>
+        <textarea class="wmd-input" id="wmd-input">
+            This is the *first* editor. ------------------------------ Just plain **Markdown**, except that the input is sanitized:
 
-        <script type="text/javascript" src="../../Markdown.Converter.js"></script>
-        <script type="text/javascript" src="../../Markdown.Sanitizer.js"></script>
-        <script type="text/javascript" src="../../Markdown.Editor.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/0.18.0/css/semantic.min.css">
-<script src="https://cdn.jsdelivr.net/semantic-ui/0.18.0/javascript/semantic.min.js"></script>
-        
-<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
-    </head>
+            <marquee>I'm the ghost from the past!</marquee>
 
- <body>
-        <div class="wmd-panel">
-            <div id="wmd-button-bar"></div>
-            <textarea class="wmd-input" id="wmd-input">
-This is the *first* editor.
-------------------------------
-
-Just plain **Markdown**, except that the input is sanitized:
-
-<marquee>I'm the ghost from the past!</marquee>
-
-and that it implements "fenced blockquotes" via a plugin:
-
-"""
-Do it like this:
-
-1. Have idea.
-2. ???
-3. Profit!
-"""
-</textarea>
+            and that it implements "fenced blockquotes" via a plugin: """ Do it like this: 1. Have idea. 2. ??? 3. Profit! """
+        </textarea>
+    </div>
+    <div class="left panel">
+        <div class="ui vertical divider">
+            <a href="#" id="collapse">
+                <i class="right arrow icon"></i>
+            </a>
         </div>
+        <div id="wmd-preview" class="wmd-panel wmd-preview">
+        </div>
+    </div>
+    <br />
+    <br />
+    <script type="text/javascript">
+        (function () {
+            var converter1 = Markdown.getSanitizingConverter();
 
-        <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
-
-        <br /> <br />
-
-
-        <script type="text/javascript">
-            (function () {
-                var converter1 = Markdown.getSanitizingConverter();
-
-                converter1.hooks.chain("preBlockGamut", function (text, rbg) {
-                    return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
-                        return "<blockquote>" + rbg(inner) + "</blockquote>\n";
-                    });
+            converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+                return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+                    return "<blockquote>" + rbg(inner) + "</blockquote>\n";
                 });
+            });
 
-                var editor1 = new Markdown.Editor(converter1);
+            var editor1 = new Markdown.Editor(converter1);
 
-                editor1.run();
-                $( document ).ready(function() {
-                        
-                    var $el = $('.wmd-input');
-                     $el.scroll(function() {
-                         $('.wmd-preview').scrollTop($el.scrollTop());
-                     });
-                   });
+            editor1.run();
+            $(document).ready(function () {
 
-            })();
-        </script>
-    </body>
+                var $el = $('.wmd-input');
+                $el.scroll(function () {
+                    $('.wmd-preview').scrollTop($el.scrollTop());
+                });
+                $('#collapse').on('click', function (e) {
+                    e.preventDefault();
+                    if (!$('i.arrow.icon').hasClass('spinned')) {
+                        $('.left.panel').animate({
+                            width: '0px'
+                        }, 750);
+                        $('.input-panel').animate({
+                            width: '98%'
+                        }, 750);
+                        $('.ui.divider').animate({
+                            left: '98%'
+                        }, 750);
+                        $('i.arrow.icon').addClass('spinned');
+                    } else {
+                        $('.left.panel').animate({
+                            width: '50%'
+                        }, 750);
+                        $('.ui.divider').animate({
+                            left: '50%'
+                        }, 750);
+                        $('.input-panel').animate({
+                            width: '48%'
+                        }, 750);
+                        $('i.arrow.icon').removeClass('spinned');
+                    }
+                });
+            });
+
+        })();
+    </script>
+</body>
+
 </html>

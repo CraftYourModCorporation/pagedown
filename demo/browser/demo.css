@@ -16,7 +16,7 @@ blockquote
     float: left;
 
     width: 48%;
-    height: 88% !important;
+    height: 88%;
     margin: auto;
 }
 .wmd-button-bar
@@ -39,20 +39,52 @@ blockquote
     border-width: 0;
     outline: none;
 }
+.left.panel {
+    display: block;
+    float: right;
+    width: 50%;
+    height: 95%%;
+    margin-top: 38px;
+    padding-left: 20px;
+    
+    white-space: nowrap;
+    overflow-y: hidden;
+}
+.ui.divider {
+   z-index: 0;
+    background-color: #fff;
+}
+a i.arrow.icon {
+    color: #000;
+    text-decoration: none;
+}
+i.arrow.icon {
+    -moz-transition: all 500ms ease;
+    /* WebKit */
+    -webkit-transition: all 500ms ease;
+    /* Opera */
+    -o-transition: all 500ms ease;
+    /* Standard */
+    transition: all 500ms ease;
+}
+i.arrow.icon.spinned {
+    -moz-transform: rotate(-180deg); 
+    -webkit-transform: rotate(-180deg); 
+    transform: rotate(-180deg);
+    
+}
 .wmd-preview
 {
     font-family: Menlo, Consolas, 'Courier New', Courier, monospace;
 
-    display: block;
-    float: right;
     overflow: scroll;
-
-    width: 50%;
-    height: 10%;
-    margin-top: 38px;
+    width: 97.5%;
+    height: 100%;
+    margin-left: 0px;
     padding-left: 20px;
-
+    
     background-color: #f6f6f8;
+    overflow-y: hidden;
 }
 .wmd-button-row
 {
@@ -62,6 +94,7 @@ blockquote
     left: 0;
     padding: 0 0;
     width: 100%;
+    z-index: 100;
 }
 .menu {
     border-radius: 0 0 0 0 !important;
