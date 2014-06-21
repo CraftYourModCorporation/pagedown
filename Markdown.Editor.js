@@ -1,4 +1,4 @@
-﻿// needs Markdown.Converter.js at the moment
+// needs Markdown.Converter.js at the moment
 
 (function () {
 
@@ -1376,10 +1376,10 @@
         };
 
         function setupButton(button, isEnabled) {
-
-            var normalYShift = "0px";
+            console.log(button);
+            /*var normalYShift = "0px";
             var disabledYShift = "-20px";
-            var highlightYShift = "-40px";
+            var highlightYShift = "-40px";*/
             //var image = button.getElementsByTagName("span")[0];
             if (isEnabled) {
                 /*image.style.backgroundPosition = button.XShift + " " + normalYShift;
@@ -1433,13 +1433,13 @@
 
             var buttonRow = document.createElement("ul");
             buttonRow.id = "wmd-button-row" + postfix;
-            buttonRow.className = 'wmd-button-row ui icon small secondary menu';
+            buttonRow.className = 'wmd-button-row ui small icon inverted borderless menu';
             buttonRow = buttonBar.appendChild(buttonRow);
 
             var makeSpacer, group;
             var makeButton = function (id, title, icon, textOp) {
                 var button = document.createElement("a");
-                button.className = "wmd-button item";
+                button.className = "wmd-button vertically fitted item";
                 var buttonImage = document.createElement("i");
                 button.id = id + postfix;
                 buttonImage.className = icon + " icon"
@@ -1480,8 +1480,8 @@
             }));
             buttons.heading = makeButton("wmd-heading-button", getString("heading"), "font", bindCommand("doHeading"));
             buttons.hr = makeButton("wmd-hr-button", getString("hr"), "horizontal ellipsis", null);
-            buttons.redo.execute = function (manager) { if (manager) manager.redo(); };
-
+            //buttons.redo.execute = function (manager) { if (manager) manager.redo(); };
+/*
             if (helpOptions) {
                 var helpButton = document.createElement("li");
                 var helpButtonImage = document.createElement("span");
@@ -1497,16 +1497,16 @@
                 setupButton(helpButton, true);
                 buttonRow.appendChild(helpButton);
                 buttons.help = helpButton;
-            }
+            }*/
 
-            setUndoRedoButtonStates();
+            //setUndoRedoButtonStates();
         }
 
         function setUndoRedoButtonStates() {
-            if (undoManager) {
+           /* if (undoManager) {
                 setupButton(buttons.undo, undoManager.canUndo());
                 setupButton(buttons.redo, undoManager.canRedo());
-            }
+            }*/
         };
 
         this.setUndoRedoButtonStates = setUndoRedoButtonStates;
