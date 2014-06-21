@@ -1480,7 +1480,18 @@
             }));
             buttons.heading = makeButton("wmd-heading-button", getString("heading"), "font", bindCommand("doHeading"));
             buttons.hr = makeButton("wmd-hr-button", getString("hr"), "horizontal ellipsis", null);
-            //buttons.redo.execute = function (manager) { if (manager) manager.redo(); };
+            
+            buttons.undo = makeButton("wmd-undo-button", getString("undo"), "undo", null);
+            buttons.undo.execute = function (manager) { if (manager) manager.undo(); };
+
+            var redoTitle = /win/.test(nav.platform.toLowerCase()) ?
+                getString("redo") :
+                getString("redomac"); // mac and other non-Windows platforms
+
+            buttons.redo = makeButton("wmd-redo-button", redoTitle, "counterclockwise flipped undo", null);
+            buttons.redo.execute = function (manager) { if (manager) manager.redo(); };
+
+
 /*
             if (helpOptions) {
                 var helpButton = document.createElement("li");
@@ -1503,10 +1514,10 @@
         }
 
         function setUndoRedoButtonStates() {
-           /* if (undoManager) {
+            if (undoManager) {
                 setupButton(buttons.undo, undoManager.canUndo());
                 setupButton(buttons.redo, undoManager.canRedo());
-            }*/
+            }
         };
 
         this.setUndoRedoButtonStates = setUndoRedoButtonStates;
