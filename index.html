@@ -4,12 +4,10 @@
 <head>
     <title>PageDown Demo Page</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="Markdown.Converter.js"></script>
-    <script type="text/javascript" src="Markdown.Sanitizer.js"></script>
-    <script type="text/javascript" src="Markdown.Editor.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/0.18.0/css/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/semantic-ui/0.18.0/javascript/semantic.min.js"></script>
+    <script type="text/javascript" src="pagedown.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
 </head>
 
@@ -17,11 +15,19 @@
     <div class="wmd-panel input-panel">
         <div id="wmd-button-bar"></div>
         <textarea class="wmd-input" id="wmd-input">
-            This is the *first* editor. ------------------------------ Just plain **Markdown**, except that the input is sanitized:
+This is the *first* editor.
+------------------------------
+Just plain **Markdown**, except that the input is sanitized:
 
-            <marquee>I'm the ghost from the past!</marquee>
+<marquee>I'm the ghost from the past!</marquee>
 
-            and that it implements "fenced blockquotes" via a plugin: """ Do it like this: 1. Have idea. 2. ??? 3. Profit! """
+and that it implements "fenced blockquotes" via a plugin:
+"""
+Do it like this:
+1. Have idea.
+2. ???
+3. Profit!
+"""
         </textarea>
     </div>
     <div class="left panel">
@@ -48,39 +54,7 @@
             var editor1 = new Markdown.Editor(converter1);
 
             editor1.run();
-            $(document).ready(function () {
 
-                var $el = $('.wmd-input');
-                $el.scroll(function () {
-                    $('.wmd-preview').scrollTop($el.scrollTop());
-                });
-                $('#collapse').on('click', function (e) {
-                    e.preventDefault();
-                    if (!$('i.arrow.icon').hasClass('spinned')) {
-                        $('.left.panel').animate({
-                            width: '0px'
-                        }, 750);
-                        $('.input-panel').animate({
-                            width: '98%'
-                        }, 750);
-                        $('.ui.divider').animate({
-                            left: '98%'
-                        }, 750);
-                        $('i.arrow.icon').addClass('spinned');
-                    } else {
-                        $('.left.panel').animate({
-                            width: '50%'
-                        }, 750);
-                        $('.ui.divider').animate({
-                            left: '50%'
-                        }, 750);
-                        $('.input-panel').animate({
-                            width: '48%'
-                        }, 750);
-                        $('i.arrow.icon').removeClass('spinned');
-                    }
-                });
-            });
 
         })();
     </script>

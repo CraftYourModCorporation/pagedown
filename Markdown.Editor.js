@@ -1480,7 +1480,7 @@
             }));
             buttons.heading = makeButton("wmd-heading-button", getString("heading"), "font", bindCommand("doHeading"));
             buttons.hr = makeButton("wmd-hr-button", getString("hr"), "horizontal ellipsis", null);
-            
+
             buttons.undo = makeButton("wmd-undo-button", getString("undo"), "undo", null);
             buttons.undo.execute = function (manager) { if (manager) manager.undo(); };
 
@@ -2210,3 +2210,36 @@
 
 
 })();
+$(document).ready(function () {
+
+    var $el = $('.wmd-input');
+    $el.scroll(function () {
+        $('.wmd-preview').scrollTop($el.scrollTop());
+    });
+    $('#collapse').on('click', function (e) {
+        e.preventDefault();
+        if (!$('i.arrow.icon').hasClass('spinned')) {
+            $('.left.panel').animate({
+                width: '0px'
+            }, 750);
+            $('.input-panel').animate({
+                width: '98%'
+            }, 750);
+            $('.ui.divider').animate({
+                left: '98%'
+            }, 750);
+            $('i.arrow.icon').addClass('spinned');
+        } else {
+            $('.left.panel').animate({
+                width: '50%'
+            }, 750);
+            $('.ui.divider').animate({
+                left: '50%'
+            }, 750);
+            $('.input-panel').animate({
+                width: '48%'
+            }, 750);
+            $('i.arrow.icon').removeClass('spinned');
+        }
+    });
+});
