@@ -1253,10 +1253,10 @@ else
             //
 
             // Strip leading and trailing lines:
-            text = text.replace(/^\n+/g, "");
-            text = text.replace(/\n+$/g, "");
+            //text = text.replace(/^\n+/g, "");
+            //text = text.replace(/\n+$/g, "");
 
-            var grafs = text.split(/\n{2,}/g);
+            var grafs = text.split(/\n/g);
             var grafsOut = [];
 
             var markerRe = /~K(\d+)K/;
@@ -3005,7 +3005,6 @@ else
         };
 
         function setupButton(button, isEnabled) {
-            console.log(button);
             /*var normalYShift = "0px";
             var disabledYShift = "-20px";
             var highlightYShift = "-40px";*/
@@ -3841,9 +3840,11 @@ else
 })();
 $(document).ready(function () {
 
-    var $el = $('.wmd-input');
-    $el.scroll(function () {
-        $('.wmd-preview').scrollTop($el.scrollTop());
+    var $input = $('.wmd-input');
+    var $preview = $('.wmd-preview');
+    $input.scroll(function () {
+      var percentage = $input.get(0).scrollTop / ($input.get(0).scrollHeight - $input.get(0).offsetHeight);
+      $preview.scrollTop(percentage * ($preview.get(0).scrollHeight - $preview.get(0).offsetHeight));
     });
     $('#collapse').on('click', function (e) {
         e.preventDefault();
