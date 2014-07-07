@@ -23,9 +23,3 @@
     "tests"
   ]
 }
-* `/mod/:slug` route contains tabs <kbd>Overview</kbd> (selected), <kbd>Stats</kbd>, <kbd>Edit general</kbd>, <kbd>Edit body</kbd> and <kbd>Actions</kbd>
-* `/mod/:slug/stats` route contains tabs <kbd>Overview</kbd>, <kbd>Stats</kbd> (selected), <kbd>Edit general</kbd>, <kbd>Edit body</kbd> and <kbd>Actions</kbd>
-* `/mod/:slug/stats` route contains tabs <kbd>Overview</kbd>, <kbd>Stats</kbd> (selected), <kbd>Edit general</kbd> (selected), <kbd>Edit body </kbd> and <kbd>Actions</kbd>
-* ...
-* `/user` route contains tabs `Overview` (selected), `Stats`, `Edit profile` and `Actions`
-* ...

@@ -6,7 +6,6 @@
     "keywords": ["markdown"],
     "license": "MIT",
     "files": ["pagedown.js", "pagedown.min.js"],
-    "main": "node-pagedown.js",
     "bugs": "http://code.google.com/p/pagedown/issues/list",
     "homepage": "http://code.google.com/p/pagedown/wiki/PageDown"
 }
