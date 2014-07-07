@@ -9,6 +9,13 @@
     <script src="https://cdn.jsdelivr.net/semantic-ui/0.18.0/javascript/semantic.min.js"></script>
     <script type="text/javascript" src="pagedown.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <style>
+body,html
+{
+    height: 100%;
+    margin: 0 0;
+}
+    </style>
 </head>
 
 <body>
@@ -27,7 +34,7 @@ Etiam ornare euismod nunc a tincidunt. Vestibulum venenatis turpis id dui cursus
      </div>
     <script>
         $(document).ready(function(){
-            $('#editor').setupEditor("**Bold**");
+            $('#editor').setupEditor("**Bold**", false);
         });
     </script>
 </body>

@@ -4,8 +4,8 @@
     if (!$) {
         return console.err("Semantic Markdown Editor requires jQuery");
     }
-    $.fn.setupEditor = function (content) {
-        var html = "<div id=\"wmd-button-bar\"></div>\n<div class=\"wmd-panel input-panel\">\n  <textarea class=\"wmd-input\" id=\"wmd-input\">\n  " + content + "\n  </textarea>\n</div>\n<div class=\"left panel\">\n  <div class=\"vertical divider\">\n    <a href=\"#\" id=\"collapse\">\n    <i class=\"right circular arrow icon\"></i>\n    </a>\n  </div>\n  <div id=\"wmd-preview\" class=\"wmd-panel wmd-preview\">\n  </div>\n</div>";
+    $.fn.setupEditor = function (content, divider) {
+        var html = "<div id=\"wmd-button-bar\"></div>\n<div class=\"wmd-panel input-panel\">\n  <textarea class=\"wmd-input\" id=\"wmd-input\">\n  " + content + "\n  </textarea>\n</div>\n<div class=\"left panel\">\n  "+ (divider ? "<div class=\"vertical divider\">\n    <a href=\"#\" id=\"collapse\">\n    <i class=\"right circular arrow icon\"></i>\n    </a>\n  </div>" : "") +"\n  <div id=\"wmd-preview\" class=\"wmd-panel wmd-preview\">\n  </div>\n</div>";
         $(this).html(html);
         var editor1 = new Markdown.Editor(Markdown.getSanitizingConverter());
         $('.divider').css('top', $(this).height() / 2 + $(this).offset().top);

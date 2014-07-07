@@ -1,9 +1,4 @@
-body,
-html
-{
-    height: 100%;
-    margin: 0 0;
-}
+
 .wmd-panel
 {
     float: left;
@@ -11,8 +6,9 @@ html
     width: 48%;
     height: 88%;
 }
-.input-panel {
-  height: 93%;
+.input-panel
+{
+    height: 93%;
 }
 .wmd-button-bar
 {
@@ -28,64 +24,72 @@ html
     height: 100%;
     margin-left: 20px;
 
+    resize: none;
+
     border-width: 0;
     outline: none;
-
-    resize: none;
 }
-.left.panel {
+.left.panel
+{
     float: right;
+
     width: 48%;
     height: 95%;
     padding-left: 20px;
+}
+.divider
+{
+    position: absolute;
+    z-index: 0;
 
+    width: 20px;
 }
-.divider {
-   z-index: 0;
-   width: 20px;
-   position: absolute;
-}
-a i.arrow.icon {
-    color: #000;
+a i.arrow.icon
+{
     text-decoration: none;
+
+    color: #000;
 }
-i.arrow.icon {
-    -moz-transition: all 500ms ease;
+i.arrow.icon
+{
     /* WebKit */
     -webkit-transition: all 500ms ease;
+       -moz-transition: all 500ms ease;
     /* Opera */
-    -o-transition: all 500ms ease;
+         -o-transition: all 500ms ease;
     /* Standard */
-    transition: all 500ms ease;
+            transition: all 500ms ease;
 }
-i.arrow.icon.spinned {
-    -moz-transform: rotate(-180deg);
+i.arrow.icon.spinned
+{
     -webkit-transform: rotate(-180deg);
-    transform: rotate(-180deg);
-
+       -moz-transform: rotate(-180deg);
+            transform: rotate(-180deg);
 }
 .wmd-preview
 {
     font-family: Menlo, Consolas, 'Courier New', Courier, monospace;
 
+    overflow-y: scroll;
+
     width: 97.5%;
     height: 88%;
-    margin-left: 0px;
+    margin-left: 0;
     padding-left: 20px;
-
-    background-color: #eeefec;
-        overflow-y: scroll;
 }
-#wmd-button-bar {
+#wmd-button-bar
+{
     width: 100%;
 }
 .wmd-button-row
 {
-    padding: 0 0;
-    width: 100% !important;
     z-index: 100;
+
+    width: 100% !important;
+    padding: 0 0;
 }
-.menu {
+.menu
+{
     border-radius: 0 0 0 0 !important;
 }
 
