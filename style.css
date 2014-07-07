@@ -10,7 +10,6 @@ html
 
     width: 48%;
     height: 88%;
-    margin: auto;
 }
 .input-panel {
   height: 93%;
@@ -19,18 +18,19 @@ html
 {
     width: 100%;
 }
+#editor {
+    height: 500px;
+    margin-left: 100px;
+}
 .wmd-input
 {
     font-family: Menlo, Consolas, 'Courier New', Courier, monospace;
 
-    display: block;
     float: left;
 
-    width: 100%;
+    width: 90%;
     height: 100%;
-    margin-top: 38px;
     margin-left: 20px;
-    padding-top: 20px;
 
     border-width: 0;
     outline: none;
@@ -38,17 +38,16 @@ html
     resize: none;
 }
 .left.panel {
-    display: block;
     float: right;
-    width: 50%;
+    width: 48%;
     height: 95%;
-    margin-top: 38px;
     padding-left: 20px;
 
 }
-.ui.divider {
+.divider {
    z-index: 0;
-    background-color: #fff;
+   width: 20px;
+   position: absolute;
 }
 a i.arrow.icon {
     color: #000;
@@ -74,36 +73,26 @@ i.arrow.icon.spinned {
     font-family: Menlo, Consolas, 'Courier New', Courier, monospace;
 
     width: 97.5%;
-    height: 100%;
+    height: 88%;
     margin-left: 0px;
     padding-left: 20px;
 
-    background-color: #f6f6f8;
+    background-color: #eeefec;
         overflow-y: scroll;
+}
+#wmd-button-bar {
+    width: 100%;
 }
 .wmd-button-row
 {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
     padding: 0 0;
-    width: 100%;
+    width: 100% !important;
     z-index: 100;
 }
 .menu {
     border-radius: 0 0 0 0 !important;
 }
-.wmd-spacer
-{
-    position: absolute;
 
-    display: inline-block;
-
-    list-style: none;
-
-    background-color: silver;
-}
 .wmd-button
 {
     display: inline-block;
